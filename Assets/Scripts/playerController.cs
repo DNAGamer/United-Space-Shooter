@@ -15,6 +15,7 @@ public class playerController : MonoBehaviour {
     public Text livesText;
     public Text DeathText;
     public Text kills;
+    public Text Controls;
     public int kill = -1;
     public string DEBUG;
 
@@ -42,7 +43,7 @@ public class playerController : MonoBehaviour {
         gameOver = false;
         healthText.text = "Health: " + health;
         livesText.text = "Lives: " + lives;
-        kills.text = "";
+        kills.text = "Kills: ";
         DeathText.text = "";
         rb2d = GetComponent<Rigidbody2D>();
         rend = GetComponent<Renderer>();
@@ -82,10 +83,11 @@ public class playerController : MonoBehaviour {
         healthText.text = "Health: " + health;
         livesText.text = "Lives: " + lives;
         if (gameOver) {
+            background.gameObject.GetComponent<Renderer>().enabled = false;
             healthText.text = "";
             livesText.text = "";
-            kills.color = Color.red;
-            background.gameObject.GetComponent<Renderer>().enabled = false;
+            Controls.text = "";
+
             return;
         }
         
@@ -95,7 +97,10 @@ public class playerController : MonoBehaviour {
             float moveVertical = (Input.GetAxis("Vertical") * VSpeed) * movementMultiplier;
 
             if (moveVertical != 0 || moveHorizontal != 0)
+            {
                 rb2d.gravityScale = 0;
+                rb2d.velocity = new Vector2(0, 0);
+            }
             else
                 rb2d.gravityScale = 4;  
             if (moveVertical <= 0)
