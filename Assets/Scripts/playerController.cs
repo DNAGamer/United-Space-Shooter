@@ -1,14 +1,21 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class playerController : MonoBehaviour {
     public float speed;
     public float HSpeed;
     public float VSpeed;
     public float directionModifier;
+    public GameObject background;
     public GameObject pew;
     public GameObject enemyA;
+    public Text healthText;
+    public Text livesText;
+    public Text DeathText;
+    public Text kills;
+    public int kill = -1;
     public string DEBUG;
 
     public int defaultEnemyDamage;
@@ -25,12 +32,18 @@ public class playerController : MonoBehaviour {
     public int movementMultiplier;
     private bool canAct;
     private bool invincible;
+    private bool gameOver;
+    private GameObject enemy;
 
     private Renderer rend;
     private Rigidbody2D rb2d;
 
 	void Start () {
-        
+        gameOver = false;
+        healthText.text = "Health: " + health;
+        livesText.text = "Lives: " + lives;
+        kills.text = "";
+        DeathText.text = "";
         rb2d = GetComponent<Rigidbody2D>();
         rend = GetComponent<Renderer>();
         fireRateMultiplier = 1;
@@ -40,9 +53,11 @@ public class playerController : MonoBehaviour {
         canAct = false;
         Respawn();
 	}
-
+    
     void Update()
     {
+        if (gameOver)
+            canAct = false;
         if (!canAct)
         {
             rend.enabled = false;
@@ -53,16 +68,27 @@ public class playerController : MonoBehaviour {
                 float rounds = GameObject.FindGameObjectsWithTag("bullet").Length;
                 if (rounds <= (maxBullets * fireRateMultiplier))
                 {
-                    GameObject bullet = Instantiate(pew, new Vector2(transform.position.x, (transform.position.y) +0.8f ), Quaternion.identity);
+                    GameObject bullet = Instantiate(pew, new Vector3(transform.position.x, (transform.position.y) +0.8f , -0.05f), Quaternion.identity);
                     bullet.GetComponent<Rigidbody2D>().velocity = new Vector2(0, 10f);
+                   
 
                 }
             }
             }
     }
 
-	void FixedUpdate ()
-        {
+    void FixedUpdate()
+    {
+        healthText.text = "Health: " + health;
+        livesText.text = "Lives: " + lives;
+        if (gameOver) {
+            healthText.text = "";
+            livesText.text = "";
+            kills.color = Color.red;
+            background.gameObject.GetComponent<Renderer>().enabled = false;
+            return;
+        }
+        
         if (canAct)
         {
             float moveHorizontal = (Input.GetAxis("Horizontal") * HSpeed) * movementMultiplier;
@@ -81,10 +107,15 @@ public class playerController : MonoBehaviour {
             rb2d.velocity = movement;
         }
         if (GameObject.FindGameObjectsWithTag("enemy").Length == 0){
-            GameObject enemy = Instantiate(enemyA, new Vector2(-4.55f, 4f), Quaternion.identity);
+            enemy = Instantiate(enemyA, new Vector3(-4.55f, 4f, -0.5f), Quaternion.identity);
             enemy.GetComponent<Renderer>().enabled = false;
             enemy.GetComponent<Rigidbody2D>().velocity = new Vector2(0, 0);
             enemy.GetComponent<Rigidbody2D>().gravityScale = 0;
+            kill++;
+            if (kill != -1 || kill != 0)
+            {
+                kills.text = "Kills: " + kill;
+            }
         }
 
     }
@@ -102,16 +133,25 @@ public class playerController : MonoBehaviour {
     {
         if (!invincible)
         {
-            health = health - defaultEnemyDamage;
+            
+            health = health - Random.Range(defaultEnemyDamage, defaultEnemyDamage*3);
             if (health <= 0)
             {
                 if (lives <= 0)
                 {/*gameover*/}
                 else
                 {
-                    Respawn();
+                    DeathText.text = "DED";
                     health = 100;
                     lives--;
+                    if (lives == 0)
+                    {
+                        DeathText.text = "100% DED";
+                        Destroy(enemy.gameObject);
+                        gameOver = true;
+                    }
+                    if (!gameOver)
+                        Respawn();
                 }
             }
             else
@@ -135,6 +175,7 @@ public class playerController : MonoBehaviour {
         yield return new WaitForSeconds(delay);
         canAct = true;
         rend.enabled = true;
+        DeathText.text = "";
     }
 
     IEnumerator blink()

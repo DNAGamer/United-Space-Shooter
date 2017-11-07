@@ -102,8 +102,10 @@ MonoBehaviour:
   startPosition: -4.55
   endPosition: 4.55
   timePerLap: 2.5
-  dropTime: 10
+  dropTime: 7
   debugTime: 0
+  shootDelay: 0.5
+  pew: {fileID: 1933193100175956, guid: e2d83638cf79bd646b27e688a77d0224, type: 2}
   startTime: 0
 --- !u!212 &212497777485934836
 SpriteRenderer:
@@ -114,6 +116,7 @@ SpriteRenderer:
   m_Enabled: 1
   m_CastShadows: 0
   m_ReceiveShadows: 0
+  m_DynamicOccludee: 1
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
@@ -129,6 +132,7 @@ SpriteRenderer:
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
+  m_StitchLightmapSeams: 0
   m_SelectedEditorRenderState: 0
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5

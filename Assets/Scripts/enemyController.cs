@@ -10,14 +10,17 @@ public class enemyController : MonoBehaviour
     public float timePerLap;
     public float dropTime;
     public float debugTime;
+    public float shootDelay;
+    public GameObject pew;
 
     private Vector2 P1;
     private Vector2 P2;
     private bool canAct;
     private Renderer rend;
     public float startTime = 0;
+    private bool shoot = false;
 
-    void Start()
+    void Awake()
     {
         rend = GetComponent<Renderer>();
         rend.enabled = false;
@@ -26,9 +29,14 @@ public class enemyController : MonoBehaviour
         P2 = new Vector2(endPosition, 4);
         canAct = false;
         Respawn();
-    }
+        dropTime = Random.Range(0, dropTime);
+        timePerLap = Random.Range(0.5f, timePerLap);
+        shootDelay = Random.Range(0.2f, shootDelay);
 
-    void FixedUpdate()
+
+}
+
+void FixedUpdate()
     {
         if (GetComponent<Rigidbody2D>().gravityScale == 0 && rend.enabled == true)
         {
@@ -45,6 +53,11 @@ public class enemyController : MonoBehaviour
         }
 
         transform.position = Vector3.Lerp(P1, P2, Mathf.SmoothStep(0f, 1f, Mathf.PingPong(Time.time / timePerLap, 1f)));
+        if (!shoot && rend.enabled == true)
+        {
+            InvokeRepeating("Shoot", 0f, shootDelay);
+            shoot = true;
+        }
 
         if (canAct)
         {
@@ -73,6 +86,13 @@ public class enemyController : MonoBehaviour
         
     }
 
+    void Shoot()
+    {
+        GameObject bullet = Instantiate(pew, new Vector3(transform.position.x, (transform.position.y) - 1f, -0.05f), Quaternion.identity);
+
+        bullet.GetComponent<Rigidbody2D>().velocity = new Vector2(0, -10f);
+    }
+        
 
     IEnumerator sleep(float delay)
     {
