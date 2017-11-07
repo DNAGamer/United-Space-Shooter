@@ -8,9 +8,7 @@ public class playerController : MonoBehaviour {
     public float HSpeed;
     public float VSpeed;
     public float directionModifier;
-    public GameObject background;
-    public GameObject pew;
-    public GameObject enemyA;
+    
     public Text healthText;
     public Text livesText;
     public Text DeathText;
@@ -35,6 +33,14 @@ public class playerController : MonoBehaviour {
     private bool invincible;
     private bool gameOver;
     private GameObject enemy;
+    public GameObject background;
+    public GameObject pew;
+    public GameObject enemyA;
+    public GameObject bonusDamge;
+    public GameObject bonusFireRate;
+    public GameObject bonusHealth;
+    public GameObject bonusLife;
+    public GameObject bonusSpeed;
 
     private Renderer rend;
     private Rigidbody2D rb2d;
@@ -69,11 +75,10 @@ public class playerController : MonoBehaviour {
                 float rounds = GameObject.FindGameObjectsWithTag("bullet").Length;
                 if (rounds <= (maxBullets * fireRateMultiplier))
                 {
-                    GameObject bullet = Instantiate(pew, new Vector3(transform.position.x, (transform.position.y) +0.8f , -0.05f), Quaternion.identity);
+                    GameObject bullet = Instantiate(pew, new Vector3(transform.position.x, (transform.position.y) + 0.8f, -0.05f), Quaternion.identity);
                     bullet.GetComponent<Rigidbody2D>().velocity = new Vector2(0, 10f);
-                   
-
                 }
+                   
             }
             }
     }
@@ -127,10 +132,27 @@ public class playerController : MonoBehaviour {
 
     void OnTriggerEnter2D(Collider2D other)
     {
-        DEBUG = "TOUCHING";
-        if (other.gameObject.CompareTag("enemy"))
+        DEBUG = other.gameObject.tag;
+        if (other.gameObject.tag == ("enemy")) {
             Destroy(other.gameObject);
             Damage(other.gameObject.name);
+        }
+        else if (other.gameObject.tag == ("bonus"))
+        {
+            DEBUG = other.gameObject.name;
+            if (other.gameObject.name.Contains(bonusDamge.gameObject.name))
+                fireDamageMultiplier++;
+            if (other.gameObject.name.Contains(bonusFireRate.gameObject.name))
+                fireRateMultiplier++;
+            if (other.gameObject.name.Contains(bonusHealth.gameObject.name))
+                health = 100;
+            if (other.gameObject.name.Contains(bonusLife.gameObject.name))
+                lives++;
+            if (other.gameObject.name.Contains(bonusSpeed.gameObject.name))
+                movementMultiplier++;
+            Destroy(other.gameObject);
+            StartCoroutine(blink());
+        }
 
     }
 

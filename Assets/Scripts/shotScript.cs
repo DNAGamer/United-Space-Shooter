@@ -5,6 +5,12 @@ using UnityEngine;
 public class shotScript : MonoBehaviour {
     public int speed;
     public int damage;
+    
+    public GameObject bonusLife;
+    public GameObject bonusHealth;
+    public GameObject bonusSpeed;
+    public GameObject bonusDamage;
+    public GameObject bonusFireRate;
     public float deathY;
 
 
@@ -26,13 +32,33 @@ public class shotScript : MonoBehaviour {
 
     void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.tag != "Player" && other.tag != "wall")
+        if (other.tag != "Player" && other.tag != "wall" && other.tag != "bonus")
         {
             if (other.gameObject.GetComponent<Renderer>().enabled == true)
             {
+                if (other.gameObject.tag == "enemy")
+                {
+                    //bonus item
+                    int num = Random.Range(0, 20);
+                    if (num >= 1 && num <= 20)  
+                    {
+                        num = Random.Range(1, 5);
+                        if (num == 1)
+                            Instantiate(bonusLife, new Vector3(transform.position.x, transform.position.y, transform.position.z), Quaternion.identity);
+                        if (num == 2)
+                            Instantiate(bonusHealth, new Vector3(transform.position.x, transform.position.y, transform.position.z), Quaternion.identity);
+                        if (num == 3)
+                            Instantiate(bonusSpeed, new Vector3(transform.position.x, transform.position.y, transform.position.z), Quaternion.identity);
+                        if (num == 4)
+                            Instantiate(bonusDamage, new Vector3(transform.position.x, transform.position.y, transform.position.z), Quaternion.identity);
+                        if (num == 5)
+                            Instantiate(bonusFireRate, new Vector3(transform.position.x, transform.position.y, transform.position.z), Quaternion.identity);
+                    }
+                    }
+                }
                 Destroy(other.gameObject);
                 Destroy(gameObject);
             }
         }
     }
-}
+
