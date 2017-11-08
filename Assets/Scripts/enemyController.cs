@@ -68,16 +68,6 @@ void FixedUpdate()
         }
     }
 
-    void OnTiggerEnter2D(Collider2D other)
-    {
-
-        if (other.gameObject.CompareTag("Bullet"))
-        {
-            Destroy(other.gameObject);
-            Destroy(gameObject);
-        }
-    }
-
     void Respawn()
     {
         canAct = false;

@@ -32,14 +32,14 @@ public class shotScript : MonoBehaviour {
 
     void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.tag != "Player" && other.tag != "wall" && other.tag != "bonus")
+        if (other.tag != "Player" && other.tag != "wall" && other.tag != "bonus" && !other.name.Contains("Pew"))
         {
             if (other.gameObject.GetComponent<Renderer>().enabled == true)
             {
                 if (other.gameObject.tag == "enemy")
                 {
                     //bonus item
-                    int num = Random.Range(0, 20);
+                    int num = Random.Range(0, 100);
                     if (num >= 1 && num <= 20)  
                     {
                         num = Random.Range(1, 5);
@@ -54,10 +54,11 @@ public class shotScript : MonoBehaviour {
                         if (num == 5)
                             Instantiate(bonusFireRate, new Vector3(transform.position.x, transform.position.y, transform.position.z), Quaternion.identity);
                     }
-                    }
+                    Destroy(other.gameObject);
+                    Destroy(gameObject);
                 }
-                Destroy(other.gameObject);
-                Destroy(gameObject);
+                }
+                
             }
         }
     }
