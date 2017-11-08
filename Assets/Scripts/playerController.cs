@@ -92,7 +92,7 @@ public class playerController : MonoBehaviour {
             healthText.text = "";
             livesText.text = "";
             Controls.text = "";
-
+            kills.color = color.red;
             return;
         }
         
@@ -151,7 +151,7 @@ public class playerController : MonoBehaviour {
             if (other.gameObject.name.Contains(bonusSpeed.gameObject.name))
                 movementMultiplier++;
             Destroy(other.gameObject);
-            StartCoroutine(blink());
+            StartCoroutine(colorFlash());
         }
 
     }
@@ -216,6 +216,13 @@ public class playerController : MonoBehaviour {
             yield return new WaitForSeconds(0.2f);
         }
         invincible = false;
+    }
+
+    IEnumerator colorFlash(){
+        rend.colorFlash;
+        yield return new WaitForSeconds(0.2f);
+        rend.colorFlash;
+        yield return new WaitForSeconds(0.2f);
     }
 }
     
