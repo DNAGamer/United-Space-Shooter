@@ -36,6 +36,7 @@ public class playerController : MonoBehaviour {
     public GameObject background;
     public GameObject pew;
     public GameObject enemyA;
+    public GameObject enemyD;
     public GameObject bonusDamge;
     public GameObject bonusFireRate;
     public GameObject bonusHealth;
@@ -126,6 +127,10 @@ public class playerController : MonoBehaviour {
             {
                 kills.text = "Kills: " + kill;
             }
+        if (GameObject.FindGameObjectsWithTag("rocket").Length == 0)
+            {
+                enemy = Instantiate(enemyD, new Vector3(0, 10f, -0.5f), Quaternion.identity);
+            }
         }
 
     }
@@ -133,7 +138,7 @@ public class playerController : MonoBehaviour {
     void OnTriggerEnter2D(Collider2D other)
     {
         DEBUG = other.gameObject.tag;
-        if (other.gameObject.tag == ("enemy")) {
+        if (other.gameObject.tag == ("enemy") || other.gameObject.tag == ("rocket")) {
             Destroy(other.gameObject);
             Damage(other.gameObject.name);
         }
