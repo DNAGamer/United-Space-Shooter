@@ -6,22 +6,14 @@ public class rocketController : MonoBehaviour {
 
     public float rotationSpeed;
     public float speed;
-    public float startTime = 0;
-    public float debugTime;
 
     void Start () {
-
+        Destroy(gameObject, 6f);
     }
 
     void Update () {
-        float time = Time.timeSinceLevelLoad - startTime;
-        debugTime = time;
-
-        if ((time) > 6f)
-        {
-            Destroy(gameObject);
-        }
-            var player = GameObject.Find("player");
+        
+        var player = GameObject.Find("player");
         if (player.GetComponent<Renderer>().enabled == false)
             Destroy(gameObject);
 

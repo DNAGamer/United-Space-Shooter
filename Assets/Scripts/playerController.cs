@@ -94,6 +94,7 @@ public class playerController : MonoBehaviour {
             livesText.text = "";
             Controls.text = "";
             kills.color = Color.red;
+            Destroy(gameObject);
             return;
         }
         
@@ -137,6 +138,10 @@ public class playerController : MonoBehaviour {
 
     void OnTriggerEnter2D(Collider2D other)
     {
+        var player = GameObject.Find("player");
+        if (player == null) {
+            Destroy(gameObject);
+        }
         DEBUG = other.gameObject.tag;
         if (other.gameObject.tag == ("enemy") || other.gameObject.tag == ("rocket")) {
             Destroy(other.gameObject);
