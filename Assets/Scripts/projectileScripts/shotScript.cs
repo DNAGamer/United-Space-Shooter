@@ -16,6 +16,7 @@ public class shotScript : MonoBehaviour {
 
     void Start () {
         GetComponent<Rigidbody2D>().velocity = new Vector2(0, speed);
+        GetComponent<Rigidbody2D>().transform.position = new Vector3(transform.position.x, transform.position.y, 0);
 	}
 	
 	void OnBecomeInvisible() {
@@ -36,7 +37,7 @@ public class shotScript : MonoBehaviour {
         {
             if (other.gameObject.GetComponent<Renderer>().enabled == true)
             {
-                if (other.gameObject.tag == "enemy")
+                if (other.gameObject.tag == "enemy" || other.gameObject.tag == "enemyRocket" || other.gameObject.tag == "rocket")
                 {
                     //bonus item
                     int num = Random.Range(0, 100);

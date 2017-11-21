@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class enemyController : MonoBehaviour
+public class Enemy_C_Controller : MonoBehaviour
 {
 
     public float startPosition;
@@ -35,7 +35,7 @@ public class enemyController : MonoBehaviour
         shootDelay = Random.Range(0.2f, shootDelay);
     }
 
-void FixedUpdate()
+    void FixedUpdate()
     {
         if (GetComponent<Rigidbody2D>().gravityScale == 0 && rend.enabled == true)
         {
@@ -66,6 +66,15 @@ void FixedUpdate()
         }else
         {
             rend.enabled = false;
+        }
+    }
+
+    void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.tag == "Player")
+        {
+            other.GetComponent<playerController>().Damage(50);
+            Destroy(gameObject);
         }
     }
 

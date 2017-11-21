@@ -26,4 +26,14 @@ public class rocketController : MonoBehaviour {
         float step = speed * Time.deltaTime;
         transform.position = Vector2.MoveTowards(transform.position, player.transform.position, step);
     }
+
+    void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.tag == "Player")
+        {
+            other.GetComponent<playerController>().Damage(20);
+            Destroy(gameObject);
+        }
+    }
+
 }

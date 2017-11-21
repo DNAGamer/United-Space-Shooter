@@ -45,6 +45,7 @@ public class playerController : MonoBehaviour {
     public GameObject bonusHealth;
     public GameObject bonusLife;
     public GameObject bonusSpeed;
+ 
 
     private Renderer rend;
     private Rigidbody2D rb2d;
@@ -132,26 +133,18 @@ public class playerController : MonoBehaviour {
             {
                 kills.text = "Kills: " + kill;
             }
-        if (GameObject.FindGameObjectsWithTag("rocket").Length == 0)
+        if (GameObject.FindGameObjectsWithTag("enemyRocket").Length == 0)
             {
                 enemy = Instantiate(enemyD, new Vector3(0, 10f, -0.5f), Quaternion.identity);
+                kills.text = "Kills: " + kill;
             }
         }
 
     }
 
-    void OnTriggerEnter2D(Collider2D other)
+    void OnTriggerEnter2D(Collider2D other) 
     {
-        var player = GameObject.Find("player");
-        if (player == null) {
-            Destroy(gameObject);
-        }
-        DEBUG = other.gameObject.tag;
-        if (other.gameObject.tag == ("enemy") || other.gameObject.tag == ("rocket")) {
-            Destroy(other.gameObject);
-            Damage(other.gameObject.name);
-        }
-        else if (other.gameObject.tag == ("bonus"))
+    if (other.gameObject.tag == ("bonus"))
         {
             DEBUG = other.gameObject.name;
             if (other.gameObject.name.Contains(bonusDamge.gameObject.name))
@@ -170,49 +163,32 @@ public class playerController : MonoBehaviour {
 
     }
 
-    void Damage(string hostile)
+    public void Damage(int damage)
     {
         if (!invincible)
+            health = health - damage;
+        if (health <= 0)
         {
-            
-            health = health - Random.Range(defaultEnemyDamage, defaultEnemyDamage*3);
-            if (health <= 0)
+            lives--;
+            dead = true;
+            if (lives == 0) //  GAME OVER
             {
-                if (lives <= 0)
-                {/*gameover*/}
-                else
-                {
-                    DeathText.text = "DED";
-                    health = 100;
-                    lives--;
-                    dead = true;
-                    if (lives == 0)
-                    {
-                        DeathText.text = "100% DED";
-                        Destroy(enemy.gameObject);
-                        gameOver = true;
-                        
-                    }
-                    if (!gameOver)
-                        Respawn();
-                }
-            }
-            else
+                DeathText.text = "100% DED";
+                dead = true;
+                gameOver = true;
+            } else // DIED 
             {
-                StartCoroutine(blink());
+                DeathText.text = "DED";
+                health = 100;
+                Respawn();
             }
         }
-       }
-
-    static void damage(int health)
-    {
-        if (!inv)
     }
 
     void Respawn() {
         canAct = false;
         rb2d.velocity = new Vector2(0,0);
-        transform.position = new Vector3(spawnY, spawnX, -0.1F);
+        transform.position = new Vector3(spawnY, spawnX, 0);
         StartCoroutine(sleep(2));
         
     }

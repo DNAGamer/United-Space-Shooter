@@ -33,6 +33,7 @@ public class EnemyShotScript : MonoBehaviour
         {
             if (other.gameObject.GetComponent<Renderer>().enabled == true)
             {
+                other.GetComponent<playerController>().Damage(10);
                 Destroy(gameObject);
             }
         }

@@ -9,6 +9,8 @@ TagManager:
   - enemy
   - bonus
   - rocket
+  - enemyRocket
+  - fleetCommander
   layers:
   - Default
   - TransparentFX
