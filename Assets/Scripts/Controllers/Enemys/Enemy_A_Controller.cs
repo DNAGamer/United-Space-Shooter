@@ -45,6 +45,7 @@ public class Enemy_A_Controller : MonoBehaviour {
             return;
         if (other.gameObject.tag == "bullet")
         {
+            System.Console.Write(gameObject.name + "Died");
             Destroy(gameObject);
         }
     }

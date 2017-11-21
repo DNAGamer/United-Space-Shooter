@@ -123,23 +123,7 @@ public class playerController : MonoBehaviour {
             Vector2 movement = new Vector2(moveHorizontal, moveVertical);
             rb2d.velocity = movement;
         }
-        if (GameObject.FindGameObjectsWithTag("enemy").Length == 0){
-            enemy = Instantiate(enemyA, new Vector3(-4.55f, 4f, -0.5f), Quaternion.identity);
-            enemy.GetComponent<Renderer>().enabled = false;
-            enemy.GetComponent<Rigidbody2D>().velocity = new Vector2(0, 0);
-            enemy.GetComponent<Rigidbody2D>().gravityScale = 0;
-            kill++;
-            if (kill != -1 || kill != 0)
-            {
-                kills.text = "Kills: " + kill;
-            }
-        if (GameObject.FindGameObjectsWithTag("enemyRocket").Length == 0)
-            {
-                enemy = Instantiate(enemyD, new Vector3(0, 10f, -0.5f), Quaternion.identity);
-                kills.text = "Kills: " + kill;
-            }
-        }
-
+        
     }
 
     void OnTriggerEnter2D(Collider2D other) 
