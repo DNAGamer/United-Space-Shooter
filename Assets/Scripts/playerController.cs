@@ -8,6 +8,7 @@ public class playerController : MonoBehaviour {
     public float HSpeed;
     public float VSpeed;
     public float directionModifier;
+    public static bool dead;
     
     public Text healthText;
     public Text livesText;
@@ -29,6 +30,8 @@ public class playerController : MonoBehaviour {
     public int fireRateMultiplier;
     public int fireDamageMultiplier;
     public int movementMultiplier;
+
+
     private bool canAct;
     private bool invincible;
     private bool gameOver;
@@ -47,6 +50,7 @@ public class playerController : MonoBehaviour {
     private Rigidbody2D rb2d;
 
 	void Start () {
+        dead = false;
         gameOver = false;
         healthText.text = "Health: " + health;
         livesText.text = "Lives: " + lives;
@@ -181,11 +185,13 @@ public class playerController : MonoBehaviour {
                     DeathText.text = "DED";
                     health = 100;
                     lives--;
+                    dead = true;
                     if (lives == 0)
                     {
                         DeathText.text = "100% DED";
                         Destroy(enemy.gameObject);
                         gameOver = true;
+                        
                     }
                     if (!gameOver)
                         Respawn();
@@ -197,6 +203,11 @@ public class playerController : MonoBehaviour {
             }
         }
        }
+
+    static void damage(int health)
+    {
+        if (!inv)
+    }
 
     void Respawn() {
         canAct = false;
@@ -213,6 +224,7 @@ public class playerController : MonoBehaviour {
         canAct = true;
         rend.enabled = true;
         DeathText.text = "";
+        dead = false;
     }
 
     IEnumerator blink()

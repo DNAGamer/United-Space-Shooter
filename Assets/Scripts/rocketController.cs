@@ -9,12 +9,13 @@ public class rocketController : MonoBehaviour {
 
     void Start () {
         Destroy(gameObject, 6f);
+        
     }
 
     void Update () {
-        
         var player = GameObject.Find("player");
-        if (player.GetComponent<Renderer>().enabled == false)
+        var playerC = FindObjectOfType(typeof(playerController));
+        if (playerController.dead == true)
             Destroy(gameObject);
 
         Vector3 vectorToTarget = player.transform.position - transform.position;

@@ -20,6 +20,7 @@ public class enemyController : MonoBehaviour
     public float startTime = 0;
     private bool shoot = false;
 
+
     void Awake()
     {
         rend = GetComponent<Renderer>();
@@ -32,9 +33,7 @@ public class enemyController : MonoBehaviour
         dropTime = Random.Range(0, dropTime);
         timePerLap = Random.Range(0.5f, timePerLap);
         shootDelay = Random.Range(0.2f, shootDelay);
-
-
-}
+    }
 
 void FixedUpdate()
     {
@@ -47,10 +46,12 @@ void FixedUpdate()
                 GetComponent<Rigidbody2D>().gravityScale = 2;
             }
         }
-        if (transform.position.y < -6)
+        var playerC = FindObjectOfType(typeof(playerController));
+        if (transform.position.y < -6 || playerController.dead == true)
         {
             Destroy(gameObject);
         }
+            
 
         transform.position = Vector3.Lerp(P1, P2, Mathf.SmoothStep(0f, 1f, Mathf.PingPong(Time.time / timePerLap, 1f)));
         if (!shoot && rend.enabled == true)

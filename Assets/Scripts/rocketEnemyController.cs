@@ -28,9 +28,6 @@ public class rocketEnemyController : MonoBehaviour {
     }
 
 	void FixedUpdate () {
-        if (GetComponent<Renderer>().enabled == true && shot == false)
-            InvokeRepeating("Shoot", 0f, reload);
-
         if (spawnLocation == 0)
         {
             spawnLocation = Random.Range(maxLeft, maxRight);
@@ -43,12 +40,15 @@ public class rocketEnemyController : MonoBehaviour {
             float step = speed * Time.deltaTime;
             transform.position = Vector2.MoveTowards(transform.position, new Vector2(spawnLocation, 2), step);
         }
-	}
+        if (GetComponent<Renderer>().enabled == true && shot == false && transform.position.x == spawnLocation && transform.position.y == 2)
+            InvokeRepeating("Shoot", 0f, reload);
+    }
 
     void Shoot()
     {
         float rounds = GameObject.FindGameObjectsWithTag("rocket").Length;
-        if (rounds == 0 && GameObject.Find("player").GetComponent<Renderer>().enabled == true)
+        var playerC = FindObjectOfType(typeof(playerController));
+        if (rounds == 0 && playerController.dead == false)
         {
             GameObject rocketController = Instantiate(rocket, new Vector3(transform.position.x, (transform.position.y) - 1f, -0.05f), Quaternion.Euler(0, 0, -90));
         }
