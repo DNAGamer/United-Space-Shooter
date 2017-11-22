@@ -10,63 +10,107 @@ public class spawner : MonoBehaviour
     public GameObject enemyB;
     public GameObject enemyC;
     public GameObject enemyD;
+    static public Text killText;
+    static public int kills;
 
-    public float kills;
-
-    public Text killText;
+    ScoreClass score = new ScoreClass();
+    SpawnClass spawn = new SpawnClass();
 
     void Start()
     {
-
+        StartCoroutine(spawnController());
     }
 
     void FixedUpdate()
     {
+    }
 
-        //EnemyA
-        if (GameObject.FindGameObjectsWithTag("EnemyA").Length == 0)
+    IEnumerator spawnController()
+    {
+        while (true)
         {
-            GameObject enemy = Instantiate(enemyA, new Vector3(0, 0, 0), Quaternion.identity);
-            kills++;
-            killText.text = "Kills: " + kills;
-        }
-
-        //EnemyB
-        if (GameObject.FindGameObjectsWithTag("EnemyB").Length == 0)
-        {
-            GameObject enemy = Instantiate(enemyB, new Vector3(0, 0, 0), Quaternion.identity);
-            kills++;
-            killText.text = "Kills: " + kills;
-        }
-
-        //EnemyC
-        if (GameObject.FindGameObjectsWithTag("EnemyC").Length == 0)
-        {
-            GameObject enemy = Instantiate(enemyC, new Vector3(0, 0, 0), Quaternion.identity);
-            kills++;
-            killText.text = "Kills: " + kills;
-        }
-
-        //EnemyD
-        if (GameObject.FindGameObjectsWithTag("enemyRocket").Length == 0)
-        {
-            GameObject enemy = Instantiate(enemyD, new Vector3(0, 10f, -0.5f), Quaternion.identity);
-            killText.text = "Kills: " + kills;
-        }
-        if (GameObject.FindGameObjectsWithTag("enemy").Length == 0)
-        {
-            GameObject enemy = Instantiate(enemyA, new Vector3(-4.55f, 4f, -0.5f), Quaternion.identity);
-            enemy.GetComponent<Renderer>().enabled = false;
-            enemy.GetComponent<Rigidbody2D>().velocity = new Vector2(0, 0);
-            enemy.GetComponent<Rigidbody2D>().gravityScale = 0;
-            kills++;
-            if (kills != -1 || kills != 0)
+            if (playerController.dead == false && GameObject.Find("player").GetComponent<Renderer>().enabled == true)
             {
-                killText.text = "Kills: " + kills;
+                spawn.EnemyA();
+                yield return new WaitForSeconds(20);
             }
         }
+    }
+}
+
+public class SpawnClass
+{
+    public spawner spawnClone;
+    public spawner core;
+
+    private ScoreClass Score = new ScoreClass();
+    private GameObject enemyA;
+    private GameObject enemyB;
+    private GameObject enemyC;
+    private GameObject enemyD;
+
+    public void EnemyA()
+    {
+        core = GameObject.Instantiate(spawnClone) as spawner;
+
+        enemyA = core.enemyA;
+        GameObject enemy = GameObject.Instantiate(enemyA, new Vector3(0, 0, 0), Quaternion.identity);
+        Score.setScore(Score.getScore() + 1);
+    }
+
+    public void EnemyB()
+    {
+        core = GameObject.Instantiate(spawnClone) as spawner;
+
+        enemyB = core.enemyB;
+        GameObject enemy = GameObject.Instantiate(enemyB, new Vector3(0, 0, 0), Quaternion.identity);
+        Score.setScore(Score.getScore() + 1);
+    }
+
+    public void EnemyC()
+    {
+        core = GameObject.Instantiate(spawnClone) as spawner;
+
+        enemyC = core.enemyC;
+        GameObject enemy = GameObject.Instantiate(enemyA, new Vector3(-4.55f, 4f, -0.5f), Quaternion.identity);
+        enemy.GetComponent<Renderer>().enabled = false;
+        enemy.GetComponent<Rigidbody2D>().velocity = new Vector2(0, 0);
+        enemy.GetComponent<Rigidbody2D>().gravityScale = 0;
+        Score.setScore(Score.getScore() + 1);
+    }
+
+    public void EnemyD()
+    {
+        GameObject enemy = GameObject.Instantiate(enemyC, new Vector3(0, 0, 0), Quaternion.identity);
+        Score.setScore(Score.getScore() + 1);
+    }
+}
 
 
-        
+public class ScoreClass
+{
+
+    private int kills;
+    private Text killText;
+
+    public int getScore()
+    {
+        return (kills);
+    }
+
+    public string getKillText()
+    {
+        return (killText.text);
+    }
+
+    public void setScore(int points)
+    {
+        kills = points;
+        setKillText(points);
+    }
+
+    public void setKillText(int points)
+    {
+        killText.text = "Kills: " + points;
     }
 }
