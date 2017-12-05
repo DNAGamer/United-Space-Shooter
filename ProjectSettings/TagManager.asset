@@ -11,6 +11,7 @@ TagManager:
   - rocket
   - enemyRocket
   - fleetCommander
+  - score
   layers:
   - Default
   - TransparentFX

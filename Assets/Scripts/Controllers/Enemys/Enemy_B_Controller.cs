@@ -37,9 +37,8 @@ public class Enemy_B_Controller : MonoBehaviour {
     {
         while (true)
         {
-            float rounds = GameObject.FindGameObjectsWithTag("rocket").Length;
             yield return new WaitForSeconds(delay);
-            if (rounds == 0 && playerController.dead == false && GetComponent<Renderer>().enabled == true && transform.position.x == spawnLocation && transform.position.y == 2)
+            if (playerController.dead == false && GetComponent<Renderer>().enabled == true && transform.position.x == spawnLocation && transform.position.y == 2)
             {
                 GameObject rocketController = Instantiate(rocket, new Vector3(transform.position.x, (transform.position.y) - 1f, -0.05f), Quaternion.Euler(0, 0, -90));
             }

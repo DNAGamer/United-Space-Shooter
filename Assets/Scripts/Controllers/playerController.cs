@@ -13,9 +13,8 @@ public class playerController : MonoBehaviour {
     public Text healthText;
     public Text livesText;
     public Text DeathText;
-    public Text kills;
     public Text Controls;
-    public int kill = -1;
+    public Text Score;
     public string DEBUG;
 
     public int defaultEnemyDamage;
@@ -23,6 +22,8 @@ public class playerController : MonoBehaviour {
 
     public int lives;
     public int health;
+    public int points;
+    public static float bonusRarity = 3;
     public float spawnX;
     public float spawnY;
     public float maxBullets;
@@ -45,6 +46,7 @@ public class playerController : MonoBehaviour {
     public GameObject bonusHealth;
     public GameObject bonusLife;
     public GameObject bonusSpeed;
+
  
 
     private Renderer rend;
@@ -55,7 +57,7 @@ public class playerController : MonoBehaviour {
         gameOver = false;
         healthText.text = "Health: " + health;
         livesText.text = "Lives: " + lives;
-        kills.text = "Kills: ";
+        Score.text = "Kills: 0";
         DeathText.text = "";
         rb2d = GetComponent<Rigidbody2D>();
         rend = GetComponent<Renderer>();
@@ -98,7 +100,7 @@ public class playerController : MonoBehaviour {
             healthText.text = "";
             livesText.text = "";
             Controls.text = "";
-            kills.color = Color.red;
+            Score.color = Color.red;
             Destroy(gameObject);
             return;
         }
@@ -175,6 +177,13 @@ public class playerController : MonoBehaviour {
         transform.position = new Vector3(spawnY, spawnX, 0);
         StartCoroutine(sleep(2));
         
+    }
+
+    public void killupdator()
+    {
+        points = points + 1;
+        Score.text = "Kills: " + points;
+        DEBUG = Score.text;
     }
 
 

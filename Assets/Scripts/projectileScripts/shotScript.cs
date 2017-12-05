@@ -1,10 +1,14 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class shotScript : MonoBehaviour {
     public int speed;
     public int damage;
+    public int score;
+    public Text ScoreText;
+
     
     public GameObject bonusLife;
     public GameObject bonusHealth;
@@ -37,10 +41,13 @@ public class shotScript : MonoBehaviour {
         {
             if (other.gameObject.GetComponent<Renderer>().enabled == true)
             {
-                if (other.gameObject.tag == "enemy" || other.gameObject.tag == "enemyRocket" || other.gameObject.tag == "rocket")
+                if (other.gameObject.tag == "enemy" || other.gameObject.tag == "enemyRocket" || other.gameObject.tag == "rocket" || other.gameObject.tag == "fleetMember")
                 {
+                    playerController p = GameObject.Find("player").GetComponent<playerController>();
+                    p.killupdator();
                     //bonus item
-                    int num = Random.Range(0, 100);
+                    int max = System.Convert.ToInt32(100 * playerController.bonusRarity);
+                    int num = Random.Range(0, max);
                     if (num >= 1 && num <= 20)  
                     {
                         num = Random.Range(1, 5);

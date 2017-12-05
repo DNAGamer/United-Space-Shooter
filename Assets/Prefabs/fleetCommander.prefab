@@ -25,7 +25,7 @@ GameObject:
   - component: {fileID: 114677638727100426}
   m_Layer: 0
   m_Name: formationEnemy (3)
-  m_TagString: Untagged
+  m_TagString: enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -44,7 +44,7 @@ GameObject:
   - component: {fileID: 114591471662057432}
   m_Layer: 0
   m_Name: formationEnemy (1)
-  m_TagString: Untagged
+  m_TagString: enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -63,7 +63,7 @@ GameObject:
   - component: {fileID: 114695131706019340}
   m_Layer: 0
   m_Name: formationEnemy (2)
-  m_TagString: Untagged
+  m_TagString: enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -98,7 +98,7 @@ GameObject:
   - component: {fileID: 114029633690360416}
   m_Layer: 0
   m_Name: formationEnemy (4)
-  m_TagString: Untagged
+  m_TagString: enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -117,7 +117,7 @@ GameObject:
   - component: {fileID: 114988215806464050}
   m_Layer: 0
   m_Name: formationEnemy (5)
-  m_TagString: Untagged
+  m_TagString: enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -136,7 +136,7 @@ GameObject:
   - component: {fileID: 114102052004294600}
   m_Layer: 0
   m_Name: formationEnemy (6)
-  m_TagString: Untagged
+  m_TagString: enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -155,7 +155,7 @@ GameObject:
   - component: {fileID: 114923763266686740}
   m_Layer: 0
   m_Name: formationEnemy
-  m_TagString: Untagged
+  m_TagString: enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -602,7 +602,8 @@ MonoBehaviour:
   maxLeft: 0
   MaxRight: 0
   reload: 0
-  bullet: {fileID: 0}
+  bullet: {fileID: 1933193100175956, guid: e2d83638cf79bd646b27e688a77d0224, type: 2}
+  MasterControl: 0
 --- !u!114 &114102052004294600
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -619,7 +620,8 @@ MonoBehaviour:
   maxLeft: 0
   MaxRight: 0
   reload: 0
-  bullet: {fileID: 0}
+  bullet: {fileID: 1933193100175956, guid: e2d83638cf79bd646b27e688a77d0224, type: 2}
+  MasterControl: 0
 --- !u!114 &114348610652077442
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -635,8 +637,9 @@ MonoBehaviour:
   lapTime: 4
   maxLeft: -2.77
   MaxRight: 4.92
-  reload: 1
+  reload: 2
   bullet: {fileID: 1933193100175956, guid: e2d83638cf79bd646b27e688a77d0224, type: 2}
+  MasterControl: 0
 --- !u!114 &114591471662057432
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -653,7 +656,8 @@ MonoBehaviour:
   maxLeft: 0
   MaxRight: 0
   reload: 0
-  bullet: {fileID: 0}
+  bullet: {fileID: 1933193100175956, guid: e2d83638cf79bd646b27e688a77d0224, type: 2}
+  MasterControl: 0
 --- !u!114 &114677638727100426
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -670,7 +674,8 @@ MonoBehaviour:
   maxLeft: 0
   MaxRight: 0
   reload: 0
-  bullet: {fileID: 0}
+  bullet: {fileID: 1933193100175956, guid: e2d83638cf79bd646b27e688a77d0224, type: 2}
+  MasterControl: 0
 --- !u!114 &114695131706019340
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -687,7 +692,8 @@ MonoBehaviour:
   maxLeft: 0
   MaxRight: 0
   reload: 0
-  bullet: {fileID: 0}
+  bullet: {fileID: 1933193100175956, guid: e2d83638cf79bd646b27e688a77d0224, type: 2}
+  MasterControl: 0
 --- !u!114 &114923763266686740
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -704,7 +710,8 @@ MonoBehaviour:
   maxLeft: 0
   MaxRight: 0
   reload: 0
-  bullet: {fileID: 0}
+  bullet: {fileID: 1933193100175956, guid: e2d83638cf79bd646b27e688a77d0224, type: 2}
+  MasterControl: 0
 --- !u!114 &114988215806464050
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -721,7 +728,8 @@ MonoBehaviour:
   maxLeft: 0
   MaxRight: 0
   reload: 0
-  bullet: {fileID: 0}
+  bullet: {fileID: 1933193100175956, guid: e2d83638cf79bd646b27e688a77d0224, type: 2}
+  MasterControl: 0
 --- !u!212 &212057937640918954
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -731,7 +739,6 @@ SpriteRenderer:
   m_Enabled: 1
   m_CastShadows: 0
   m_ReceiveShadows: 0
-  m_DynamicOccludee: 1
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
@@ -747,7 +754,6 @@ SpriteRenderer:
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
-  m_StitchLightmapSeams: 0
   m_SelectedEditorRenderState: 0
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5
@@ -775,7 +781,6 @@ SpriteRenderer:
   m_Enabled: 1
   m_CastShadows: 0
   m_ReceiveShadows: 0
-  m_DynamicOccludee: 1
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
@@ -791,7 +796,6 @@ SpriteRenderer:
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
-  m_StitchLightmapSeams: 0
   m_SelectedEditorRenderState: 0
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5
@@ -819,7 +823,6 @@ SpriteRenderer:
   m_Enabled: 1
   m_CastShadows: 0
   m_ReceiveShadows: 0
-  m_DynamicOccludee: 1
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
@@ -835,7 +838,6 @@ SpriteRenderer:
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
-  m_StitchLightmapSeams: 0
   m_SelectedEditorRenderState: 0
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5
@@ -863,7 +865,6 @@ SpriteRenderer:
   m_Enabled: 1
   m_CastShadows: 0
   m_ReceiveShadows: 0
-  m_DynamicOccludee: 1
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
@@ -879,7 +880,6 @@ SpriteRenderer:
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
-  m_StitchLightmapSeams: 0
   m_SelectedEditorRenderState: 0
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5
@@ -907,7 +907,6 @@ SpriteRenderer:
   m_Enabled: 1
   m_CastShadows: 0
   m_ReceiveShadows: 0
-  m_DynamicOccludee: 1
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
@@ -923,7 +922,6 @@ SpriteRenderer:
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
-  m_StitchLightmapSeams: 0
   m_SelectedEditorRenderState: 0
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5
@@ -951,7 +949,6 @@ SpriteRenderer:
   m_Enabled: 1
   m_CastShadows: 0
   m_ReceiveShadows: 0
-  m_DynamicOccludee: 1
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
@@ -967,7 +964,6 @@ SpriteRenderer:
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
-  m_StitchLightmapSeams: 0
   m_SelectedEditorRenderState: 0
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5
@@ -995,7 +991,6 @@ SpriteRenderer:
   m_Enabled: 1
   m_CastShadows: 0
   m_ReceiveShadows: 0
-  m_DynamicOccludee: 1
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
@@ -1011,7 +1006,6 @@ SpriteRenderer:
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
-  m_StitchLightmapSeams: 0
   m_SelectedEditorRenderState: 0
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5

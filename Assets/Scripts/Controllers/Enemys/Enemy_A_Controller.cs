@@ -11,20 +11,19 @@ public class Enemy_A_Controller : MonoBehaviour {
     public float reload;
     public GameObject bullet;
 
-    private bool MasterControl;
+    public bool MasterControl;
     private Vector2 P1;
     private Vector2 P2;
 
     void Awake() {
         P1 = new Vector2(maxLeft, transform.position.y);
         P2 = new Vector2(MaxRight, transform.position.y);
-        if (gameObject.name == "fleetCommander")
+        if (gameObject.name.Contains("fleetCommander"))
             MasterControl = true;
         else if (gameObject.name.Contains("formationEnemy"))
         {
             MasterControl = false;
-
-            var FCom = GameObject.FindGameObjectWithTag("fleetCommander").GetComponent<Enemy_A_Controller>(); // Grab all the relivent var from the master controller
+            var FCom = transform.parent.GetComponent<Enemy_A_Controller>();
             health = FCom.health;
             reload = FCom.reload;
             bullet = FCom.bullet;
@@ -41,22 +40,23 @@ public class Enemy_A_Controller : MonoBehaviour {
 
     void OnTriggerEnter2D(Collider2D other)
     {
-        if (gameObject.name == "fleetCommander")
+        if (gameObject.name.Contains("fleetCommander"))
             return;
         if (other.gameObject.tag == "bullet")
         {
-            System.Console.Write(gameObject.name + "Died");
+            Debug.Log(gameObject.name + "Died");
             Destroy(gameObject);
         }
     }
 
     void masterControlUpdate()
     {
-        if (GameObject.FindGameObjectsWithTag("fleetMember").Length == 0)
-        {
+        int children = 0;
+        foreach (Transform child in transform)
+            children++;
+        if (children == 0)
             Destroy(gameObject);
-        }
-        {
+        else{
             transform.position = Vector3.Lerp(P1, P2, Mathf.SmoothStep(0f, 1f, Mathf.PingPong(Time.time / lapTime, 1f)));
         }
     }
