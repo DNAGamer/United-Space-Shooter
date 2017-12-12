@@ -15,7 +15,7 @@ public class rocketController : MonoBehaviour {
 
     void Start () {
         Audio = GetComponent<AudioSource>();
-        int sound = 3;
+        int sound = Random.Range(1,3);
         switch (sound)
         {
             case 1:
@@ -34,7 +34,7 @@ public class rocketController : MonoBehaviour {
 
     void Update () {
         var player = GameObject.Find("player");
-        if (playerController.dead == true || player.GetComponent<Renderer>().enabled == false)
+        if (playerController.dead == true)
             Destroy(gameObject);
 
         Vector3 vectorToTarget = player.transform.position - transform.position;

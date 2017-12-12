@@ -23,6 +23,7 @@ GameObject:
   - component: {fileID: 50288768983483018}
   - component: {fileID: 61168429467296360}
   - component: {fileID: 114818279481802894}
+  - component: {fileID: 82706503079748992}
   m_Layer: 9
   m_Name: enemyPew
   m_TagString: enemy
@@ -38,7 +39,7 @@ Transform:
   m_GameObject: {fileID: 1933193100175956}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -2.1478329, y: -0.64429086, z: -0.05}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.5, y: 0.5, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -88,6 +89,86 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.12756443, y: 0.72065127}
   m_EdgeRadius: 0
+--- !u!82 &82706503079748992
+AudioSource:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1933193100175956}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 1
+  m_Volume: 0.06
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
 --- !u!114 &114818279481802894
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -102,6 +183,10 @@ MonoBehaviour:
   speed: -10
   damage: 0
   deathY: -6
+  Plasma1: {fileID: 8300000, guid: 709ce748a08fdf84b85a4ce7759fa47e, type: 3}
+  Plasma2: {fileID: 8300000, guid: a7d1d12fc09178d43bfb9c4305d65126, type: 3}
+  Plasma3: {fileID: 8300000, guid: 514bfc5837862e646978c60a86fb15c9, type: 3}
+  Plasma4: {fileID: 8300000, guid: f0f844b42379df44297d67af824e359c, type: 3}
 --- !u!212 &212802990505698442
 SpriteRenderer:
   m_ObjectHideFlags: 1

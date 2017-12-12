@@ -39,7 +39,7 @@ Transform:
   m_GameObject: {fileID: 1609607281262414}
   m_LocalRotation: {x: 0, y: 0, z: -0.7071068, w: 0.7071068}
   m_LocalPosition: {x: -4.4, y: 4.78, z: 0}
-  m_LocalScale: {x: 0.430031, y: 0.430031, z: 0.430031}
+  m_LocalScale: {x: 0.2, y: 0.2, z: 0.430031}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -100,7 +100,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
-  m_Volume: 1
+  m_Volume: 0.05
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -182,9 +182,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rotationSpeed: 100
   speed: 2
-  missile1: {fileID: 0}
-  missile2: {fileID: 0}
-  missile3: {fileID: 0}
+  missile1: {fileID: 8300000, guid: ca66f0ec9c20d7048bc6f9a57a009fc0, type: 3}
+  missile2: {fileID: 8300000, guid: 85cc182c7668c0548bb84eb8a1f7a78c, type: 3}
+  missile3: {fileID: 8300000, guid: bdd875e795f552a4d8bd094c5cd1072f, type: 3}
 --- !u!212 &212074572693766606
 SpriteRenderer:
   m_ObjectHideFlags: 1

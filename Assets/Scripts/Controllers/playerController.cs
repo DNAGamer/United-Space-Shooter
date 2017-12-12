@@ -195,7 +195,8 @@ public class playerController : MonoBehaviour {
                 health = 100;
                 Respawn();
                 dead = true;
-                points = points /2;
+                if (points > 0)
+                    points = points /2;
                 Score.text = "Score: " + points;
             }
         }

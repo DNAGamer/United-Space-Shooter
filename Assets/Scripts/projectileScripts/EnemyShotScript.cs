@@ -8,9 +8,32 @@ public class EnemyShotScript : MonoBehaviour
     public int damage;
     public float deathY;
 
+    public AudioClip Plasma1;
+    public AudioClip Plasma2;
+    public AudioClip Plasma3;
+    public AudioClip Plasma4;
 
-    void Start()
+    private AudioSource Audio;
+
+    void Awake()
     {
+        Audio = GetComponent<AudioSource>();
+        int sound = Random.Range(1, 4);
+        switch (sound)
+        {
+            case 1:
+                Audio.PlayOneShot(Plasma1);
+                break;
+            case 2:
+                Audio.PlayOneShot(Plasma2);
+                break;
+            case 3:
+                Audio.PlayOneShot(Plasma3);
+                break;
+            case 4:
+                Audio.PlayOneShot(Plasma4);
+                break;
+        }
         GetComponent<Rigidbody2D>().velocity = new Vector2(0, (speed));
     }
 
