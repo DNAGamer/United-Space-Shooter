@@ -23,6 +23,8 @@ public class spawner : MonoBehaviour
 
     public void EnemyA()
     {
+        if (GameObject.Find("fleetCommander(Clone)"))
+            return;
         Debug.Log(Time.timeSinceLevelLoad + "|| Spawned EnemyA");
         GameObject enemy = GameObject.Instantiate(enemyA, new Vector3(Random.Range(-46, 46)/10, Random.Range(49, 0)/100, 0), Quaternion.identity);
     }
@@ -59,11 +61,11 @@ public class spawner : MonoBehaviour
             if (playerController.dead == false && GameObject.Find("player").GetComponent<Renderer>().enabled == true)
             {
                 EnemyA();
-                yield return new WaitForSeconds(3);
+                yield return new WaitForSeconds(1.5f);
                 EnemyB();
-                yield return new WaitForSeconds(3);
+                yield return new WaitForSeconds(1.5f);
                 EnemyA();
-                yield return new WaitForSeconds(3);
+                yield return new WaitForSeconds(1.5f);
                 EnemyC();
                 yield return new WaitForSeconds(0.01f);
                 EnemyB();
@@ -71,7 +73,10 @@ public class spawner : MonoBehaviour
                 EnemyB();
                 yield return new WaitForSeconds(0.01f);
                 EnemyB();
-                yield return new WaitForSeconds(5);
+                yield return new WaitForSeconds(1.5f);
+            } else
+            {
+                yield return new WaitForSeconds(2);
             }
         }
     }

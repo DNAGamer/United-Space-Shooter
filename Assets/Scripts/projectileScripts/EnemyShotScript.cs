@@ -14,17 +14,14 @@ public class EnemyShotScript : MonoBehaviour
         GetComponent<Rigidbody2D>().velocity = new Vector2(0, (speed));
     }
 
-    void OnBecomeInvisible()
-    {
-        Destroy(gameObject);
-    }
-
     void FixedUpdate()
     {
         if (GetComponent<Rigidbody2D>().position.y < deathY)
         {
             Object.Destroy(gameObject);
         }
+        if (GameObject.Find("player").GetComponent<Renderer>().enabled == false)
+            Destroy(gameObject);
     }
 
     void OnTriggerEnter2D(Collider2D other)

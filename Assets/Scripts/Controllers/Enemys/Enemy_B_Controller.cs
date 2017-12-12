@@ -25,6 +25,8 @@ public class Enemy_B_Controller : MonoBehaviour {
     }
 
 	void FixedUpdate () {
+        if (playerController.dead)
+            Destroy(gameObject);
         if (transform.position.x != spawnLocation || transform.position.y != 2)
         {
             float step = speed * Time.deltaTime;

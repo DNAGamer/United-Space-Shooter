@@ -16,6 +16,8 @@ public class Enemy_A_Controller : MonoBehaviour {
     private Vector2 P2;
 
     void Awake() {
+        lapTime = Random.Range(1, lapTime);
+        reload = Random.Range(reload * 0.5f, reload * 1.5f);
         P1 = new Vector2(maxLeft, transform.position.y);
         P2 = new Vector2(MaxRight, transform.position.y);
         if (gameObject.name.Contains("fleetCommander"))
@@ -34,6 +36,8 @@ public class Enemy_A_Controller : MonoBehaviour {
 
     // Update is called once per frame
     void Update() {
+        if (playerController.dead)
+            Destroy(gameObject);
         if (MasterControl)
             masterControlUpdate();
     }

@@ -51,6 +51,8 @@ public class playerController : MonoBehaviour {
     public AudioClip Laser2;
     public AudioClip Laser3;
     public AudioClip Laser4;
+    public AudioClip Laser5;
+    public AudioClip Laser6;
 
     public AudioClip hit1;
     public AudioClip hit2;
@@ -59,6 +61,10 @@ public class playerController : MonoBehaviour {
     public AudioClip hit5;
     public AudioClip hit6;
 
+    public AudioClip destroy1;
+    public AudioClip destroy2;
+    public AudioClip destroy3;
+    public AudioClip GameOverDestroy;
 
 
     private Renderer rend;
@@ -71,7 +77,7 @@ public class playerController : MonoBehaviour {
         gameOver = false;
         healthText.text = "Health: " + health;
         livesText.text = "Lives: " + lives;
-        Score.text = "Kills: 0";
+        Score.text = "Score: 0";
         DeathText.text = "";
         rb2d = GetComponent<Rigidbody2D>();
         rend = GetComponent<Renderer>();
@@ -116,7 +122,6 @@ public class playerController : MonoBehaviour {
             livesText.text = "";
             Controls.text = "";
             Score.color = Color.red;
-            Destroy(gameObject);
             return;
         }
         
@@ -166,9 +171,14 @@ public class playerController : MonoBehaviour {
 
     public void Damage(int damage)
     {
-        
+        bool damaged = false;
+        points = points - 5;
+        Score.text = "Score: " + points;
         if (!invincible)
+        {
             health = health - damage;
+            damaged = true;
+        }
         if (health <= 0)
         {
             lives--;
@@ -178,22 +188,29 @@ public class playerController : MonoBehaviour {
                 DeathText.text = "100% DED";
                 dead = true;
                 gameOver = true;
-                return;
+                dead = true;
             } else // DIED 
             {
                 DeathText.text = "DED";
                 health = 100;
                 Respawn();
-                return;
+                dead = true;
+                points = points /2;
+                Score.text = "Score: " + points;
             }
         }
-        else
+        if (damaged && !dead)
             ImpactSound();
+        else if (dead && gameOver)
+            Audio.PlayOneShot(GameOverDestroy);
+        else if (dead && !gameOver)
+            Explode();
+
     }
 
     void LaserSound()
     {
-        int sound = Random.Range(1, 4);
+        int sound = Random.Range(1, 6);
         switch (sound)
         {
             case 1:
@@ -208,11 +225,19 @@ public class playerController : MonoBehaviour {
             case 4:
                 Audio.PlayOneShot(Laser4);
                 break;
+            case 5:
+                Audio.PlayOneShot(Laser5);
+                break;
+            case 6:
+                Audio.PlayOneShot(Laser6);
+                break;
         }
     }
 
     void ImpactSound()
     {
+        if (!rend.enabled)
+            return;
         int sound = Random.Range(1, 6);
         switch (sound)
         {
@@ -237,6 +262,23 @@ public class playerController : MonoBehaviour {
         }
     }
 
+    void Explode()
+    {
+        int sound = Random.Range(1, 3);
+        switch (sound)
+        {
+            case 1:
+                Audio.PlayOneShot(destroy1);
+                break;
+            case 2:
+                Audio.PlayOneShot(destroy2);
+                break;
+            case 3:
+                Audio.PlayOneShot(destroy3);
+                break;
+        }
+    }
+
     void Respawn() {
         canAct = false;
         rb2d.velocity = new Vector2(0,0);
@@ -247,8 +289,9 @@ public class playerController : MonoBehaviour {
 
     public void killupdator()
     {
+        Explode();
         points = points + 1;
-        Score.text = "Kills: " + points;
+        Score.text = "Score: " + points;
         DEBUG = Score.text;
     }
 

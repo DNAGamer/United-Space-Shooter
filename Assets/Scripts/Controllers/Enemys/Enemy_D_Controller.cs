@@ -11,6 +11,8 @@ public class Enemy_D_Controller : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		
-	}
+        if (playerController.dead)
+            Destroy(gameObject);
+
+    }
 }

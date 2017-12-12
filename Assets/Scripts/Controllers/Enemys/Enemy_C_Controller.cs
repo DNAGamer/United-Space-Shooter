@@ -37,6 +37,8 @@ public class Enemy_C_Controller : MonoBehaviour
 
     void FixedUpdate()
     {
+        if (playerController.dead)
+            Destroy(gameObject);
         if (GetComponent<Rigidbody2D>().gravityScale == 0 && rend.enabled == true)
         {
             float time = Time.timeSinceLevelLoad - startTime;

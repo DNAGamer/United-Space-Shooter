@@ -7,15 +7,34 @@ public class rocketController : MonoBehaviour {
     public float rotationSpeed;
     public float speed;
 
+    public AudioClip missile1;
+    public AudioClip missile2;
+    public AudioClip missile3;
+
+    private AudioSource Audio;
+
     void Start () {
-        Destroy(gameObject, 6f);
+        Audio = GetComponent<AudioSource>();
+        int sound = 3;
+        switch (sound)
+        {
+            case 1:
+                Audio.PlayOneShot(missile1);
+                break;
+            case 2:
+                Audio.PlayOneShot(missile2);
+                break;
+            case 3:
+                Audio.PlayOneShot(missile3);
+                break;
+        }
+        Destroy(gameObject, 4f);
         
     }
 
     void Update () {
         var player = GameObject.Find("player");
-        var playerC = FindObjectOfType(typeof(playerController));
-        if (playerController.dead == true)
+        if (playerController.dead == true || player.GetComponent<Renderer>().enabled == false)
             Destroy(gameObject);
 
         Vector3 vectorToTarget = player.transform.position - transform.position;
