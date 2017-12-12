@@ -47,12 +47,26 @@ public class playerController : MonoBehaviour {
     public GameObject bonusLife;
     public GameObject bonusSpeed;
 
- 
+    public AudioClip Laser1;
+    public AudioClip Laser2;
+    public AudioClip Laser3;
+    public AudioClip Laser4;
+
+    public AudioClip hit1;
+    public AudioClip hit2;
+    public AudioClip hit3;
+    public AudioClip hit4;
+    public AudioClip hit5;
+    public AudioClip hit6;
+
+
 
     private Renderer rend;
     private Rigidbody2D rb2d;
+    private AudioSource Audio;
 
-	void Start () {
+    void Start () {
+        Audio = GetComponent<AudioSource>();
         dead = false;
         gameOver = false;
         healthText.text = "Health: " + health;
@@ -83,6 +97,7 @@ public class playerController : MonoBehaviour {
                 float rounds = GameObject.FindGameObjectsWithTag("bullet").Length;
                 if (rounds <= (maxBullets * fireRateMultiplier))
                 {
+                    LaserSound();
                     GameObject bullet = Instantiate(pew, new Vector3(transform.position.x, (transform.position.y) + 0.8f, -0.05f), Quaternion.identity);
                     bullet.GetComponent<Rigidbody2D>().velocity = new Vector2(0, 10f);
                 }
@@ -151,6 +166,7 @@ public class playerController : MonoBehaviour {
 
     public void Damage(int damage)
     {
+        
         if (!invincible)
             health = health - damage;
         if (health <= 0)
@@ -162,12 +178,62 @@ public class playerController : MonoBehaviour {
                 DeathText.text = "100% DED";
                 dead = true;
                 gameOver = true;
+                return;
             } else // DIED 
             {
                 DeathText.text = "DED";
                 health = 100;
                 Respawn();
+                return;
             }
+        }
+        else
+            ImpactSound();
+    }
+
+    void LaserSound()
+    {
+        int sound = Random.Range(1, 4);
+        switch (sound)
+        {
+            case 1:
+                Audio.PlayOneShot(Laser1);
+                break;
+            case 2:
+                Audio.PlayOneShot(Laser2);
+                break;
+            case 3:
+                Audio.PlayOneShot(Laser3);
+                break;
+            case 4:
+                Audio.PlayOneShot(Laser4);
+                break;
+        }
+    }
+
+    void ImpactSound()
+    {
+        int sound = Random.Range(1, 6);
+        switch (sound)
+        {
+            case 1:
+                Audio.PlayOneShot(hit1);
+                break;
+            case 2:
+                Audio.PlayOneShot(hit2);
+                break;
+            case 3:
+                Audio.PlayOneShot(hit3);
+                break;
+            case 4:
+                Audio.PlayOneShot(hit4);
+                break;
+            case 5:
+                Audio.PlayOneShot(hit5);
+                break;
+            case 6:
+                Audio.PlayOneShot(hit6);
+                break;
         }
     }
 

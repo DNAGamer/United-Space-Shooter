@@ -399,6 +399,7 @@ GameObject:
   - component: {fileID: 332937921}
   - component: {fileID: 332937920}
   - component: {fileID: 332937925}
+  - component: {fileID: 332937926}
   m_Layer: 10
   m_Name: player
   m_TagString: Player
@@ -424,14 +425,14 @@ MonoBehaviour:
   healthText: {fileID: 275921179}
   livesText: {fileID: 1458375118}
   DeathText: {fileID: 1521681673}
-  kills: {fileID: 193455945}
   Controls: {fileID: 360370122}
-  kill: -1
+  Score: {fileID: 193455945}
   DEBUG: 
   defaultEnemyDamage: 30
   defaultBulletDamage: 0
   lives: 3
   health: 100
+  points: 0
   spawnX: -4
   spawnY: 0
   maxBullets: 3
@@ -449,7 +450,16 @@ MonoBehaviour:
     type: 2}
   bonusLife: {fileID: 1286974649899990, guid: d0d790662ea1d0849b861d0ce6fb56c1, type: 2}
   bonusSpeed: {fileID: 1113206675480488, guid: 73bd2341a092c3f4ca43615a4e58a72d, type: 2}
-  Score: {fileID: 193455945}
+  Laser1: {fileID: 8300000, guid: 26569c98a9bc25c4c84cac3770c60054, type: 3}
+  Laser2: {fileID: 8300000, guid: 1eaa85a271dd8c74f95a22e1979e7fa9, type: 3}
+  Laser3: {fileID: 8300000, guid: ef5970df6091f57499d0fd7f56fb535c, type: 3}
+  Laser4: {fileID: 8300000, guid: ca791794ead7e5c40bd60efc0f9ece34, type: 3}
+  hit1: {fileID: 8300000, guid: 55c9afb0188a8b040b0d68163c1e3d4c, type: 3}
+  hit2: {fileID: 8300000, guid: 1c3f1886a72d15943ad99b372334bb41, type: 3}
+  hit3: {fileID: 8300000, guid: 49a6ac55761e7fd498241654418717cf, type: 3}
+  hit4: {fileID: 8300000, guid: 1b82ebb0de0d39448a896550044e9203, type: 3}
+  hit5: {fileID: 8300000, guid: 68b06cb4e05ffd5428b406c7733fa518, type: 3}
+  hit6: {fileID: 8300000, guid: 06b0322784e0f3c4db679e37ceb0f9de, type: 3}
 --- !u!61 &332937921
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -565,6 +575,86 @@ MonoBehaviour:
   enemyB: {fileID: 1620423319271862, guid: c8c22b0d6fc95394095169421f26ad55, type: 2}
   enemyC: {fileID: 1199877420197904, guid: 1f25f3e4286bccc49affc6caf4157885, type: 2}
   enemyD: {fileID: 0}
+--- !u!82 &332937926
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 332937919}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 0
+  m_Volume: 0.1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
 --- !u!1 &360370120
 GameObject:
   m_ObjectHideFlags: 0
